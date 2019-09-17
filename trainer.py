@@ -20,7 +20,7 @@ model_name = config.model_name
 def buildModel(shape):
     model = Sequential()
     model.add(
-        LSTM(6, input_shape=(shape[1], shape[2]), return_sequences=True))
+        LSTM(6, input_shape=(shape[1], shape[2]), return_sequences=True, batch_size=20))
     model.add(Dropout(0.1))
     # output shape: (1, 1)
     # model.add(TimeDistributed(Dense(1)))    # or use model.add(Dense(1))
