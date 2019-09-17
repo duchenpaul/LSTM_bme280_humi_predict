@@ -6,6 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import random
 
+import config
+days_predict = config.days_predict
 
 def readTrain():
     train = pd.read_csv("data_set.csv")
@@ -49,7 +51,7 @@ def build_train(data_np, window=50):
     for i in range(data_np.shape[0]-1):
         X_dataset.append(data_np[i])
         # Add predict data
-        Y_dataset.append(data_np[i+1, 0])
+        Y_dataset.append(data_np[i+days_predict, 0])
     for i in range(len(X_dataset)-window):
         X.append(X_dataset[i:i+window])
         Y.append(Y_dataset[i:i+window])

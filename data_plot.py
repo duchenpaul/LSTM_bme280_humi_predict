@@ -9,6 +9,7 @@ from math import sqrt
 
 import config
 model_name = config.model_name
+days_predict = config.days_predict
 
 # Control
 import pickle
@@ -16,12 +17,13 @@ outfile = 'data_feed.pkl'
 with open(outfile,'rb') as f:
     train_data = pickle.load(f)
 X_train, Y_train = train_data
+# train = Y_train[:, 0, :]
 train = Y_train[:, 0, :]
+
 
 # Predict
 model = load_model(model_name)
-predict = model.predict(X_train, batch_size=128)
-
+predict = model.predict(X_train, batch_size=128)[days_predict:, :, :]
 
 # outfile = 'predit.npy'
 # np.save(outfile, predict)
@@ -35,7 +37,7 @@ scaler_minmax = MinMaxScaler()
 data = scaler_minmax.fit_transform([[x] for x in data_prep.train_data_df['temperature']])
 
 start = 0
-batch_size = 800
+batch_size = 100
 predict_ori = scaler_minmax.inverse_transform(predict[:, 0][start:start + batch_size])
 train_data = scaler_minmax.inverse_transform(train[start:start + batch_size])
 rms = sqrt(mean_squared_error(train_data, predict_ori))
