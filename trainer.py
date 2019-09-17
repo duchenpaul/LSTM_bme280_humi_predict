@@ -27,6 +27,9 @@ def buildModel(shape):
     # output shape: (1, 1)
     # model.add(TimeDistributed(Dense(1)))    # or use model.add(Dense(1))
     model.add(TimeDistributed(Dense(1)))
+    model.add(
+        LSTM(2, return_sequences=True))
+    model.add(TimeDistributed(Dense(1)))
     model.compile(loss="mse", optimizer="adam", metrics=['accuracy'])
     model.summary()
     return model
