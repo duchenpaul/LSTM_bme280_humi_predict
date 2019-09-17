@@ -7,11 +7,11 @@ from sklearn.preprocessing import MinMaxScaler
 import random
 
 import config
-days_predict = config.days_predict
+records_predict = config.records_predict
 
 def readTrain():
-    train = pd.read_csv("data_set.csv")
-    # train = pd.read_csv("data_set_validate.csv")
+    # train = pd.read_csv("data_set.csv")
+    train = pd.read_csv("data_set_validate.csv")
     return train
 
 
@@ -48,10 +48,10 @@ def build_train(data_np, window=50):
     Y_dataset = []
     X = []
     Y = []
-    for i in range(data_np.shape[0]-days_predict):
+    for i in range(data_np.shape[0]-records_predict):
         X_dataset.append(data_np[i])
         # Add predict data
-        Y_dataset.append(data_np[i+days_predict, 0])
+        Y_dataset.append(data_np[i+records_predict, 0])
     for i in range(len(X_dataset)-window):
         X.append(X_dataset[i:i+window])
         Y.append(Y_dataset[i:i+window])
