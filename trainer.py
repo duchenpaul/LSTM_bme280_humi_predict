@@ -16,11 +16,13 @@ import matplotlib.pyplot as plt
 import config
 
 model_name = config.model_name
+batch_size = 128
+
 
 def buildModel(shape):
     model = Sequential()
     model.add(
-        LSTM(6, input_shape=(shape[1], shape[2]), return_sequences=True, batch_size=20))
+        LSTM(6, input_shape=(shape[1], shape[2]), return_sequences=True, batch_size=batch_size))
     model.add(Dropout(0.1))
     # output shape: (1, 1)
     # model.add(TimeDistributed(Dense(1)))    # or use model.add(Dense(1))
@@ -50,5 +52,5 @@ if __name__ == '__main__':
                  embeddings_layer_names=None, 
                  embeddings_metadata=None)
 
-    model.fit(X_train, Y_train, epochs=1000, shuffle=True, batch_size=128, validation_split=0.1, callbacks=[callback, tbCallBack])
+    model.fit(X_train, Y_train, epochs=1000, shuffle=True, batch_size=batch_size, validation_split=0.1, callbacks=[callback, tbCallBack])
     model.save(model_name)
