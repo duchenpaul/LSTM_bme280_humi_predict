@@ -48,7 +48,7 @@ def build_train(data_np, window=50):
     Y_dataset = []
     X = []
     Y = []
-    for i in range(data_np.shape[0]-1):
+    for i in range(data_np.shape[0]-days_predict):
         X_dataset.append(data_np[i])
         # Add predict data
         Y_dataset.append(data_np[i+days_predict, 0])
