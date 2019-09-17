@@ -10,8 +10,8 @@ import config
 days_predict = config.days_predict
 
 def readTrain():
-    train = pd.read_csv("data_set.csv")
-    # train = pd.read_csv("data_set_validate.csv")
+    # train = pd.read_csv("data_set.csv")
+    train = pd.read_csv("data_set_validate.csv")
     return train
 
 

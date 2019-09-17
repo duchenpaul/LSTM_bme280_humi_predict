@@ -37,7 +37,7 @@ scaler_minmax = MinMaxScaler()
 data = scaler_minmax.fit_transform([[x] for x in data_prep.train_data_df['temperature']])
 
 start = 0
-batch_size = 100
+batch_size = 500
 predict_ori = scaler_minmax.inverse_transform(predict[:, 0][start:start + batch_size])
 train_data = scaler_minmax.inverse_transform(train[start:start + batch_size])
 rms = sqrt(mean_squared_error(train_data, predict_ori))
