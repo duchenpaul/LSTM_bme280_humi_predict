@@ -21,7 +21,7 @@ def buildModel(shape):
     model = Sequential()
     model.add(
         LSTM(6, input_shape=(shape[1], shape[2]), return_sequences=True))
-    # model.add(Dropout(0.1))
+    model.add(Dropout(0.1))
     # output shape: (1, 1)
     # model.add(TimeDistributed(Dense(1)))    # or use model.add(Dense(1))
     model.add(TimeDistributed(Dense(1)))
