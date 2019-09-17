@@ -4,10 +4,11 @@ import data_prep
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import load_model
 import pandas as pd
+from sklearn.metrics import mean_squared_error
+from math import sqrt
 
 import config
 model_name = config.model_name
-model_name = 'LSTM_bme280_humi_predict.modelbk1'
 
 # Control
 import pickle
@@ -37,9 +38,15 @@ start = 0
 batch_size = 800
 predict_ori = scaler_minmax.inverse_transform(predict[:, 0][start:start + batch_size])
 train_data = scaler_minmax.inverse_transform(train[start:start + batch_size])
+rms = sqrt(mean_squared_error(train_data, predict_ori))
+print('RMSE: {}'.format(rms))
+
 # print(train_data)
 plt.plot(train_data, label='train_data')
 plt.plot(predict_ori, label='predict')
+plt.plot(train_data-predict_ori, label='error')
+plt.grid(True, linestyle = "-.")
 
 plt.legend()
 plt.show()
+
